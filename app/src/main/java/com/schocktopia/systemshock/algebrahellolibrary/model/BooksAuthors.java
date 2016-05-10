@@ -1,4 +1,4 @@
-package com.schocktopia.systemshock.myrecyclerviewtutorial01.model;
+package com.schocktopia.systemshock.algebrahellolibrary.model;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;

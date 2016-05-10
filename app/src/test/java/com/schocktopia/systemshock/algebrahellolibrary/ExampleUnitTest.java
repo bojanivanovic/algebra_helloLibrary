@@ -1,4 +1,4 @@
-package com.schocktopia.systemshock.myrecyclerviewtutorial01;
+package com.schocktopia.systemshock.algebrahellolibrary;
 
 import org.junit.Test;
 

@@ -1,33 +1,37 @@
-package com.schocktopia.systemshock.myrecyclerviewtutorial01.view;
+package com.schocktopia.systemshock.algebrahellolibrary.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
-import com.schocktopia.systemshock.myrecyclerviewtutorial01.model.Authors;
-import com.schocktopia.systemshock.myrecyclerviewtutorial01.model.Books;
-import com.schocktopia.systemshock.myrecyclerviewtutorial01.model.BooksAuthors;
-import com.schocktopia.systemshock.myrecyclerviewtutorial01.presenter.MyAdapter;
-import com.schocktopia.systemshock.myrecyclerviewtutorial01.R;
+import com.schocktopia.systemshock.algebrahellolibrary.model.Authors;
+import com.schocktopia.systemshock.algebrahellolibrary.model.Books;
+import com.schocktopia.systemshock.algebrahellolibrary.model.BooksAuthors;
+import com.schocktopia.systemshock.algebrahellolibrary.presenter.RecyclerViewAdapter;
+import com.schocktopia.systemshock.algebrahellolibrary.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+	// define recyclerview objects
 	private RecyclerView recyclerView;
 	private RecyclerView.Adapter adapter;
 	private RecyclerView.LayoutManager layoutManager;
+
+	// define dataset variables
 	private List<List<String>> data;
 	private List<String> books;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		FlowManager.init(this);
+		FlowManager.init(new FlowConfig.Builder(this).build());
 		setContentView(R.layout.activity_main);
 
 		data = new ArrayList<List<String>>();
@@ -112,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 		recyclerView.setHasFixedSize(true);
 		layoutManager = new LinearLayoutManager(this);
 		recyclerView.setLayoutManager(layoutManager);
-		adapter = new MyAdapter(data);
+		adapter = new RecyclerViewAdapter(data);
 		recyclerView.setAdapter(adapter);
 	}
 

@@ -1,4 +1,4 @@
-package com.schocktopia.systemshock.myrecyclerviewtutorial01.presenter;
+package com.schocktopia.systemshock.algebrahellolibrary.presenter;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.schocktopia.systemshock.myrecyclerviewtutorial01.R;
+import com.schocktopia.systemshock.algebrahellolibrary.R;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by systemshock on 16/03/2016.
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 	//dataset that provides data for the views in RecyclerView
 	private Map<Integer, String> bookDataset;
 	private Map<Integer, String> authorDataset;
@@ -30,18 +30,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 		}
 	}
 
-//	public MyAdapter(Map<Integer, String> dataset, Map<Integer, String> authors){
+//	public RecyclerViewAdapter(Map<Integer, String> dataset, Map<Integer, String> authors){
 //		bookDataset = dataset;
 //		authorDataset = authors;
 //	}
 
-	public MyAdapter(List<List<String>> data){
+	public RecyclerViewAdapter(List<List<String>> data){
 		dataset = data;
 	}
 
 	//creating Views as invoked by LayoutManager
 	@Override
-	public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+	public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.my_text_view, parent, false);
 
