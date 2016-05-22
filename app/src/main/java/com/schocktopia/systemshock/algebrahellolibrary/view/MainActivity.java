@@ -4,13 +4,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.raizlabs.android.dbflow.config.DatabaseDefinition;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.list.FlowQueryList;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.sql.language.Select;
+import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
+import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
+import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 import com.schocktopia.systemshock.algebrahellolibrary.model.Authors;
 import com.schocktopia.systemshock.algebrahellolibrary.model.Books;
 import com.schocktopia.systemshock.algebrahellolibrary.model.BooksAuthors;
+import com.schocktopia.systemshock.algebrahellolibrary.model.MainLibraryDatabase;
 import com.schocktopia.systemshock.algebrahellolibrary.presenter.RecyclerViewAdapter;
 import com.schocktopia.systemshock.algebrahellolibrary.R;
 
@@ -111,6 +119,22 @@ public class MainActivity extends AppCompatActivity {
 		for (Authors author: authorsList) {
 			System.out.println(author.getFirstName() + " " + author.getLastName());
 		}
+
+        DatabaseDefinition database = FlowManager.getDatabase(MainLibraryDatabase.class);
+        Transaction transaction = database.beginTransactionAsync(new ITransaction() {
+            @Override
+            public void execute(DatabaseWrapper databaseWrapper) {
+                called.set(true);
+            }
+        }).build();
+
+        transaction.execute();
+
+		FlowQueryList<Books> booksTable = SQLite.select()
+                .from(Books.class)
+                .flowQueryList();
+
+        Log.d("flowquerylist", booksTable.get(0).toString() + booksTable.get(1).toString());
 
 		recyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
 		recyclerView.setHasFixedSize(true);
